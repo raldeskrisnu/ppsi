@@ -27,10 +27,11 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO barang (id_barang, jenis_barang, nama_barang, harga_beli, harga_jual, jumlah_stock, deskripsi) VALUES ('$idbarang', '$jenisbarang', '$namabarang','$hargabeli','$hargajual','$jumlahstock','$description')";
+$sql = "INSERT INTO barang (id_barang, jenis_barang, nama_barang, harga_beli, harga_jual, jumlah_stock, supplier) VALUES ('$idbarang', '$jenisbarang', '$namabarang','$hargabeli','$hargajual','$jumlahstock','$description')";
 
 if (mysqli_query($conn, $sql)) {
-    echo "<script>alert('Input data berhasil!')location.replace('stockopname.php')</script>";
+    echo "<script>alert('Input data berhasil !')
+location.replace('stockopname.php')</script>";
 } else {
     echo "<script>alert('Terjadi kesalahan!')location.replace('stockopname.php')</script>";
 }

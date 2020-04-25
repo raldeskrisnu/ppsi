@@ -126,7 +126,7 @@
         </li>
           
 
-        <li class="active treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Barang</span>	
@@ -142,7 +142,7 @@
               
         </li>   
 		
-        <li class="treeview">
+        <li class="active treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Transaksi</span>	
@@ -180,7 +180,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Input barang
+        Report
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
@@ -194,51 +194,23 @@
 		
 		<div class="row">
 
-            <form action="insertbarang" method="post" enctype="multipart/form-data" role="form">
+            <form action="downloadreport" method="post" enctype="multipart/form-data" role="form">
             
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Id Barang</h4>
-                <input type="text" class="form-control form-rounded" id="idbarang" name="idbarang" placeholder="Input ID">
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Nama Barang</h4>
-                <input type="text" class="form-control form-rounded" id="namabarang" name="namabarang" placeholder="Input Nama barang">
-            </div>
-            
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Jenis barang</h4>
-                <input type="text" class="form-control form-rounded" id="jenisbarang" name="jenisbarang" placeholder="Input Jenis barang">
-            </div>
-           
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Harga beli</h4>
-                <input type="number" class="form-control form-rounded" id="hargabeli" name="hargabeli" placeholder="Input Harga beli">
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Harga jual</h4>
-                <input type="number" class="form-control form-rounded" id="hargajual" name="hargajual" placeholder="Input Harga jual">
-            </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4>Jumlah stock</h4>
-            <input type="number" class="form-control form-rounded" id="jumlahstock" name="jumlahstock" placeholder="Input jumlah stock">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                <h4>Pilih Data</h4>
+                <select class="form-control" name="namabarang">
+                    <option selected="true" disabled="disabled">Pilih data</option>
+                    <option value="Data Barang">Data Barang</option>
+                    <option value="Data Transaksi">Data Transaksi</option>
+                    <option value="Data Hutang">Data Hutang</option>
+                </select>
+                
+                </div>            
         </div>
-    </div>
   
-    <br>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <h4>Deskripsi</h4>
-          <textarea class="description" name="description" id="description" rows="10" cols="100"></textarea><br>
-        </div>
-    </div>
+        <br>
     
-		
-		<input type="submit" onclick="activation()" id="1" name="1" class="btn btn-primary" role="button" value="Submit">
+		<input type="submit" id="1" name="1" class="btn btn-primary" role="button" value="Download">
 		</form>
 		
 		<br>
@@ -277,15 +249,26 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/editor.js"></script>
- <script>
-		function setfilename(val)
-		{
-			var fileName = val.substr(val.lastIndexOf("\\")+1, val.length);
-			document.getElementById("imagename").value = fileName;
-			
-		}
-		
-		
-	</script>
+<script type="text/javascript"> 
+<?php echo $jsArray; ?>
+function changeValue(id){
+  var harga = prdName[id].harga_barang;
+  document.getElementById('harga_barang').value = harga;
+
+};
+
+</script>
+<script type="text/javascript">
+function calculateHarga()
+{
+  var jumlahbeli = document.getElementById("jumlahbeli").value;
+  var totalhargabarang = document.getElementById("totalhargabarang");
+  var hargabarang = document.getElementById('harga_barang').value;
+
+  var total = jumlahbeli * hargabarang;
+
+  totalhargabarang.value = total;
+}
+</script>
 </body>
 </html>

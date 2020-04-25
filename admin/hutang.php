@@ -116,7 +116,7 @@
           </a>
         </li>
 
-        <li class="active treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Barang</span>	
@@ -148,7 +148,7 @@
               
         </li>
 		
-		    <li class="treeview">
+		    <li class="active treeview">
           <a href="hutang">
             <i class="fa fa-archive"></i> <span>Hutang</span>
           </a>
@@ -170,12 +170,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Cek barang
+        Hutang
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Cek barang</li>
+        <li class="active">Hutang</li>
       </ol>
     </section>
 
@@ -204,13 +204,13 @@
                             die("Connection failed: " . mysqli_connect_error());
                             }
 
-                           $sql = mysqli_query($conn, "SELECT COUNT(id_barang) as num FROM barang");
+                           $sql = mysqli_query($conn, "SELECT COUNT(id_transaksi) as num FROM transaksi");
                            $total_pages = mysqli_fetch_array($sql);
                             $yourcount = $total_pages['num'];
                            $no =1;
                            $limit = 10;
                            $adjacents = 50;
-                           $targetpage = "cekbarang.php";
+                           $targetpage = "hutang.php";
                            
                            $page = $_GET['page'];
                            if($page)
@@ -318,11 +318,11 @@
 						<thead>
                            <th>No</th>
                            <th>Nama barang</th>
-                           <th>ID Barang</th>
-                           <th>Harga barang</th>
                            <th>Harga jual</th>
-                           <th>Jumlah stock</th>
-                           <th>Deskripsi</th>
+                           <th>Jumlah beli</th>
+                           <th>Total harga</th>
+                           <th>Customer</th>
+                           <th>Status</th>
                            <th>
                               <center>Action</center>
                            </th>
@@ -330,7 +330,8 @@
 						
 						<?php
 					
-						$sql = "SELECT * FROM barang order by id_barang DESC LIMIT $start, $limit";
+						$sql = "SELECT nama_barang, id_transaksi, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang WHERE jenis_transaksi = 'Kredit'
+                        LIMIT $start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){
@@ -341,15 +342,15 @@
                         <tbody>
                            <td><?php echo $no++ ?></td>
                            <td><?php echo $row['nama_barang'] ?></td>
-                           <td><?php echo $row['id_barang'] ?></td>
-                           <td><?php echo "Rp. " . $row['harga_beli'] ?></td>
-						   <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
-                           <td><?php echo $row['jumlah_stock'] ?></td>
-                           <td><?php echo $row['deskripsi'] ?></td>
-							<?php $id = $row['id_barang']; ?>
+                           <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
+						   <td><?php echo $row['jumlah_beli'] . " Barang"?></td>
+                           <td><?php echo "Rp. " . $row['total_harga'] ?></td>
+                           <td><?php echo $row['customer'] ?></td>
+                            <?php $id = $row['id_barang']; ?>
+                           <td><?php echo $row['jenis_transaksi'] ?></td>
                            <td width="200px">
                               <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
-                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Hapus</button>
+                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Edit status</button>
 								<?php
 									if($row['show_content'] == '0')
 									{
@@ -365,7 +366,7 @@
 							
 							 <!-- Dialog Banned -->
                            <div class="modal fade" id="false" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
-                              <form action="deletebarang" method="post" id="clickform" class="form-horizontal">
+                              <form action="updatetransaksi" method="post" id="clickform" class="form-horizontal">
                                  <div class="modal-dialog">
                                     <div class="modal-content">
                                        <div class="modal-header">
@@ -375,8 +376,8 @@
                                        <div class="modal-body">
                                           <!-- Start -->
                                           <center>
-                                             <h4> Anda yakin delete barang ini? </h4>
-                                             <button name="idform" type="submit" class="btn btn-primary" value="<?php echo $row['id_barang'] ?>">Hapus</button>
+                                             <h4> Anda yakin customer sudah melakukan pembayaran lunas? </h4>
+                                             <button name="idform" type="submit" class="btn btn-primary" value="<?php echo $row['id_transaksi'] ?>">Lunas</button>
                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
                                           </center>
                                        </div>

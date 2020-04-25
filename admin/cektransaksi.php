@@ -116,7 +116,7 @@
           </a>
         </li>
 
-        <li class="active treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Barang</span>	
@@ -132,7 +132,7 @@
               
         </li>  
 		
-        <li class="treeview">
+        <li class="active treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Transaksi</span>	
@@ -170,7 +170,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Cek barang
+        Semua transaksi
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
@@ -204,7 +204,7 @@
                             die("Connection failed: " . mysqli_connect_error());
                             }
 
-                           $sql = mysqli_query($conn, "SELECT COUNT(id_barang) as num FROM barang");
+                           $sql = mysqli_query($conn, "SELECT COUNT(id_transaksi) as num FROM transaksi");
                            $total_pages = mysqli_fetch_array($sql);
                             $yourcount = $total_pages['num'];
                            $no =1;
@@ -318,19 +318,14 @@
 						<thead>
                            <th>No</th>
                            <th>Nama barang</th>
-                           <th>ID Barang</th>
                            <th>Harga barang</th>
                            <th>Harga jual</th>
-                           <th>Jumlah stock</th>
-                           <th>Deskripsi</th>
-                           <th>
-                              <center>Action</center>
-                           </th>
+                           <th>Customer</th>
                         </thead>
 						
 						<?php
 					
-						$sql = "SELECT * FROM barang order by id_barang DESC LIMIT $start, $limit";
+						$sql = "SELECT nama_barang, id_transaksi, harga_beli, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang LIMIT $start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){
@@ -341,53 +336,11 @@
                         <tbody>
                            <td><?php echo $no++ ?></td>
                            <td><?php echo $row['nama_barang'] ?></td>
-                           <td><?php echo $row['id_barang'] ?></td>
                            <td><?php echo "Rp. " . $row['harga_beli'] ?></td>
 						   <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
-                           <td><?php echo $row['jumlah_stock'] ?></td>
-                           <td><?php echo $row['deskripsi'] ?></td>
+                           <td><?php echo $row['customer'] ?></td>
 							<?php $id = $row['id_barang']; ?>
-                           <td width="200px">
-                              <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
-                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Hapus</button>
-								<?php
-									if($row['show_content'] == '0')
-									{
-										echo ' <button class="btn btn-primary" data-toggle="modal" data-target="#'. $row["id_barang"] .'">show</button>';
-									} else if($row['show_content'] == '1')
-									{
-										echo ' <button class="btn btn-primary" data-toggle="modal" data-target="#'. $row["id_barang"] .'">unshow</button>';
-									}
-								 ?>
-								
-                              </center>
-                           </td> 
-							
-							 <!-- Dialog Banned -->
-                           <div class="modal fade" id="false" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
-                              <form action="deletebarang" method="post" id="clickform" class="form-horizontal">
-                                 <div class="modal-dialog">
-                                    <div class="modal-content">
-                                       <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="delmodal" aria-hidden="true">&times;</button>
-                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Nama Barang : <?php echo $row['nama_barang'] ?> </font></h4>
-                                       </div>
-                                       <div class="modal-body">
-                                          <!-- Start -->
-                                          <center>
-                                             <h4> Anda yakin delete barang ini? </h4>
-                                             <button name="idform" type="submit" class="btn btn-primary" value="<?php echo $row['id_barang'] ?>">Hapus</button>
-                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
-                                          </center>
-                                       </div>
-                                       <div class="modal-footer">
-                                          <p> © Copyright 2017. Inventory Tokoku</p>
-                                       </div>
-                                    </div>
-                                 </div>
-								 </form>
-                           </div>
-						   
+	
 						    <!-- Dialog show -->
                            <div class="modal fade" id="<?php echo $row['id_content'] ?>" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
                               <form action="editcontent" method="post" id="clickform" class="form-horizontal">

@@ -152,19 +152,29 @@
         </li>   
 		
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-money"></i> <span>Transaksi</span>
-          </a>
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Transaksi</span>	
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li><a href="transaksi"><i class="fa fa-pencil"></i> Input transaksi</a></li>
+              <li><a href="cektransaksi"><i class="fa fa-archive"></i> Lihat transaksi</a></li>
+            </ul>
+              
         </li>
 		
 		    <li class="treeview">
-          <a href="#">
+          <a href="hutang">
             <i class="fa fa-archive"></i> <span>Hutang</span>
           </a>
         </li>
 
         <li class="treeview">
-          <a href="#">
+          <a href="report">
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
         </li>
@@ -225,8 +235,8 @@
         </div>
         <!-- /.col -->
     <?php
-    $link = mysqli_connect("localhost", "root", "", "gzone");
-			$countcontent = mysqli_query($link,"Select count(*) as total from main_content");
+    $link = mysqli_connect("localhost", "root", "", "inventory");
+			$countcontent = mysqli_query($link,"Select count(*) as total from transaksi");
 			$datacontent=mysqli_fetch_assoc($countcontent);
 		
 		?>

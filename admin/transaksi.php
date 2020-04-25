@@ -126,7 +126,7 @@
         </li>
           
 
-        <li class="active treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Barang</span>	
@@ -142,7 +142,7 @@
               
         </li>   
 		
-        <li class="treeview">
+        <li class="active treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Transaksi</span>	
@@ -180,7 +180,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Input barang
+        Input transaksi
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
@@ -194,50 +194,81 @@
 		
 		<div class="row">
 
-            <form action="insertbarang" method="post" enctype="multipart/form-data" role="form">
+            <form action="insertransaksi" method="post" enctype="multipart/form-data" role="form">
             
             <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Id Barang</h4>
-                <input type="text" class="form-control form-rounded" id="idbarang" name="idbarang" placeholder="Input ID">
+            <h4>Pilih barang</h4>
+            <select class="form-control" id="namabarang" name="namabarang" required>
+            <option selected="true" disabled="disabled">Pilih barang</option>
+            <?php
+                $mysql_hostname = "localhost";
+                $mysql_user = "root";
+                $mysql_password = "";
+                $mysql_database = "inventory";
+
+                $conn = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password, $mysql_database);
+                if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $sql = "SELECT * FROM barang ORDER BY id_barang asc";
+                $jsArray = "var prdName = new Array();\n";
+                if($result = @mysqli_query($conn,$sql)){
+                  if(mysqli_num_rows($result) > 0){
+                      while($row = mysqli_fetch_array($result)){
+
+                        $namabarang = $row['nama_barang'];
+                        $idbarang = $row['id_barang'];
+                        $jsArray .= "prdName['" . $row['id_barang'] . "'] = {harga_barang:'" . addslashes($row['harga_jual']) . "'};\n";
+         ?>
+        
+              <option value=<?=$idbarang?>><?php echo $namabarang ?></option>
+                <?php } 
+                        } 
+                      }
+                      
+                      ?>
+
+
+              </select>
+              
             </div>
 
             <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Nama Barang</h4>
-                <input type="text" class="form-control form-rounded" id="namabarang" name="namabarang" placeholder="Input Nama barang">
+              <h4>Jenis transaksi</h4>
+                <select class="form-control" id="jenistransaksi" name="jenistransaksi">
+                  <option>Cash</option>
+                  <option>Kredit</option>
+                </select>
             </div>
             
             <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Jenis barang</h4>
-                <input type="text" class="form-control form-rounded" id="jenisbarang" name="jenisbarang" placeholder="Input Jenis barang">
+                <h4>Harga barang</h4>
+                
+                <input type="number" class="form-control form-rounded" id="harga_barang" name="harga_barang" placeholder="harga barang" readonly>
             </div>
            
             <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Harga beli</h4>
-                <input type="number" class="form-control form-rounded" id="hargabeli" name="hargabeli" placeholder="Input Harga beli">
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Harga jual</h4>
-                <input type="number" class="form-control form-rounded" id="hargajual" name="hargajual" placeholder="Input Harga jual">
+                <h4>Jumlah beli</h4>
+                <input type="number" class="form-control form-rounded" id="jumlahbeli" name="jumlahbeli" placeholder="Input jumlah beli" onchange="calculateHarga()">
             </div>
     </div>
 
     <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4>Jumlah stock</h4>
-            <input type="number" class="form-control form-rounded" id="jumlahstock" name="jumlahstock" placeholder="Input jumlah stock">
+            <h4>Total harga</h4>
+            <input type="number" class="form-control form-rounded" id="totalhargabarang" name="totalhargabarang" placeholder="Harga barang" readonly>
         </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <h4>Nama customer</h4>
+            <input type="text" class="form-control form-rounded" id="namacustomer" name="namacustomer" placeholder="Nama customer">
+        </div>
+
     </div>
   
     <br>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <h4>Deskripsi</h4>
-          <textarea class="description" name="description" id="description" rows="10" cols="100"></textarea><br>
-        </div>
-    </div>
     
-		
 		<input type="submit" onclick="activation()" id="1" name="1" class="btn btn-primary" role="button" value="Submit">
 		</form>
 		
@@ -277,15 +308,26 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/editor.js"></script>
- <script>
-		function setfilename(val)
-		{
-			var fileName = val.substr(val.lastIndexOf("\\")+1, val.length);
-			document.getElementById("imagename").value = fileName;
-			
-		}
-		
-		
-	</script>
+<script type="text/javascript"> 
+<?php echo $jsArray; ?>
+function changeValue(id){
+  var harga = prdName[id].harga_barang;
+  document.getElementById('harga_barang').value = harga;
+
+};
+
+</script>
+<script type="text/javascript">
+function calculateHarga()
+{
+  var jumlahbeli = document.getElementById("jumlahbeli").value;
+  var totalhargabarang = document.getElementById("totalhargabarang");
+  var hargabarang = document.getElementById('harga_barang').value;
+
+  var total = jumlahbeli * hargabarang;
+
+  totalhargabarang.value = total;
+}
+</script>
 </body>
 </html>
