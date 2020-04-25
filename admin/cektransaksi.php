@@ -38,11 +38,11 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>P</span>
+      <span class="logo-mini"><b>I</b>T</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Control Panel</b></span>
+      <span class="logo-lg"><b>Inventory Tokoku</b></span>
     </a>
         <?php 
 		  include '../assets/connect.php';
@@ -155,7 +155,7 @@
         </li>
 
         <li class="treeview">
-          <a href="#">
+          <a href="report">
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
         </li>
@@ -321,6 +321,7 @@
                            <th>Harga barang</th>
                            <th>Harga jual</th>
                            <th>Customer</th>
+                           <th>Jenis transaksi</th>
                         </thead>
 						
 						<?php
@@ -339,6 +340,7 @@
                            <td><?php echo "Rp. " . $row['harga_beli'] ?></td>
 						   <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
                            <td><?php echo $row['customer'] ?></td>
+                           <td><?php echo $row['jenis_transaksi'] ?></td>
 							<?php $id = $row['id_barang']; ?>
 	
 						    <!-- Dialog show -->

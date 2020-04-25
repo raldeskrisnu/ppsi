@@ -44,11 +44,11 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>P</span>
+      <span class="logo-mini"><b>I</b>T</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Control Panel</b></span>
+      <span class="logo-lg"><b>Inventory Tokoku</b></span>
     </a>
 <?php 
 		  include '../assets/connect.php';

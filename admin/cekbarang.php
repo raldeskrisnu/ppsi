@@ -38,11 +38,11 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>P</span>
+      <span class="logo-mini"><b>I</b>T</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Control Panel</b></span>
+      <span class="logo-lg"><b>Inventory Tokoku</b></span>
     </a>
         <?php 
 		  include '../assets/connect.php';
@@ -322,7 +322,7 @@
                            <th>Harga barang</th>
                            <th>Harga jual</th>
                            <th>Jumlah stock</th>
-                           <th>Deskripsi</th>
+                           <th>Supplier</th>
                            <th>
                               <center>Action</center>
                            </th>
@@ -345,7 +345,7 @@
                            <td><?php echo "Rp. " . $row['harga_beli'] ?></td>
 						   <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
                            <td><?php echo $row['jumlah_stock'] ?></td>
-                           <td><?php echo $row['deskripsi'] ?></td>
+                           <td><?php echo $row['supplier'] ?></td>
 							<?php $id = $row['id_barang']; ?>
                            <td width="200px">
                               <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
