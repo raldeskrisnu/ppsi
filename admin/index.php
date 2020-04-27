@@ -62,22 +62,8 @@
 	  
     <?php 
      
-		  include '../assets/connect.php';
 			$userid = $_SESSION['username2'];	
-			$sql = "select * from special_access where username = '$userid'";
-      $link = mysqli_connect("localhost", "root", "", "gzone");
-      
-			if($result = mysqli_query($link, $cek)){
-				 if(mysqli_num_rows($result) > 0){
-					 while($row = mysqli_fetch_array($result)){
-						$username = $row['username'];
-						
-          }
-          
-         
-				 }
-			}
-		
+			
 		  ?>
 		  
       <!-- Navbar Right Menu -->
@@ -176,6 +162,12 @@
         <li class="treeview">
           <a href="report">
             <i class="fa fa-folder-o"></i> <span>Report</span>
+          </a>
+        </li>
+
+        <li class="treeview">
+          <a href="user">
+            <i class="fa fa-user"></i> <span>Pengelola User</span>
           </a>
         </li>
         

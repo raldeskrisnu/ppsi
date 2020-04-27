@@ -19,8 +19,23 @@ $hasil            = mysqli_query($bd,$cek);
 $link = mysqli_connect("localhost", "root", "", "inventory");
 
 if ($result = mysqli_query($link, $cek)) {
-	header('Location: admin/index');
-	$_SESSION['username2'] = $_POST['form-username'];
+	
+		if(mysqli_num_rows($result) > 0){
+			while($row = mysqli_fetch_array($result)){
+				if($row['role'] == "owner") {
+					header('Location: admin/index');
+					$_SESSION['username2'] = $_POST['form-username'];
+					echo "here";
+				} else if ($row['role'] == "karyawan") {
+					header('Location: karyawan/index');
+					$_SESSION['username2'] = $_POST['form-username'];
+					echo "here2";
+				}
+			}
+		} else {
+			echo "<script>alert('Maaf Username atau Password anda Salah !')
+			location.replace('index.php')</script>";
+		}
 } else {
     echo "<script>alert('Maaf Username atau Password anda Salah !')
 location.replace('index.php')</script>";
