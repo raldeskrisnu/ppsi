@@ -169,7 +169,12 @@
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
         </li>
-		
+          
+        <li class="treeview">
+          <a href="user">
+            <i class="fa fa-user"></i> <span>Pengelola User</span>
+          </a>
+        </li>
         
     </section>
     <!-- /.sidebar -->
@@ -220,6 +225,12 @@
                 <h4>Harga jual</h4>
                 <input type="number" class="form-control form-rounded" id="hargajual" name="hargajual" placeholder="Input Harga jual">
             </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <h4>Supplier</h4>
+                <input type="text" class="form-control form-rounded" id="namasupplier" name="namasupplier" placeholder="Nama Supplier">
+            </div>
+
     </div>
 
     <div class="row">

@@ -159,6 +159,12 @@
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
         </li>
+
+        <li class="treeview">
+          <a href="user">
+            <i class="fa fa-user"></i> <span>Pengelola User</span>
+          </a>
+        </li>
 		
         
     </section>
@@ -347,9 +353,10 @@
                            <td><?php echo $row['jumlah_stock'] ?></td>
                            <td><?php echo $row['supplier'] ?></td>
 							<?php $id = $row['id_barang']; ?>
+              <?php $namabarang2 = $row['nama_barang']; ?>
                            <td width="200px">
                               <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
-                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Hapus</button>
+                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false<?php echo $row['id_barang'];?>">Hapus</button>
 								<?php
 									if($row['show_content'] == '0')
 									{
@@ -364,19 +371,19 @@
                            </td> 
 							
 							 <!-- Dialog Banned -->
-                           <div class="modal fade" id="false" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
+                           <div class="modal fade" id="false<?php echo $row['id_barang'];?>" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
                               <form action="deletebarang" method="post" id="clickform" class="form-horizontal">
                                  <div class="modal-dialog">
                                     <div class="modal-content">
                                        <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="delmodal" aria-hidden="true">&times;</button>
-                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Nama Barang : <?php echo $row['nama_barang'] ?> </font></h4>
+                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Nama Barang : <?php echo $namabarang2; ?> </font></h4>
                                        </div>
                                        <div class="modal-body">
                                           <!-- Start -->
                                           <center>
                                              <h4> Anda yakin delete barang ini? </h4>
-                                             <button name="idform" type="submit" class="btn btn-primary" value="<?php echo $row['id_barang'] ?>">Hapus</button>
+                                             <button name="idform" type="submit" class="btn btn-primary" value="<?php echo $id; ?>">Hapus</button>
                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
                                           </center>
                                        </div>

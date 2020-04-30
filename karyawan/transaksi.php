@@ -184,7 +184,7 @@
             
             <div class="col-md-3 col-sm-6 col-xs-12">
             <h4>Pilih barang</h4>
-            <select class="form-control" id="namabarang" name="namabarang" required>
+            <select class="form-control" id="namabarang" name="namabarang" required onchange="changeValue(this.value)">
             <option selected="true" disabled="disabled">Pilih barang</option>
             <?php
                 $mysql_hostname = "localhost";

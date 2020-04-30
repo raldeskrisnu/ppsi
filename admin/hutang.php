@@ -159,7 +159,12 @@
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
         </li>
-		
+           
+        <li class="treeview">
+          <a href="user">
+            <i class="fa fa-user"></i> <span>Pengelola User</span>
+          </a>
+        </li>
         
     </section>
     <!-- /.sidebar -->

@@ -11,6 +11,7 @@ $hargabeli = $_POST['hargabeli'];
 $hargajual = $_POST['hargajual'];
 $jumlahstock = $_POST['jumlahstock'];
 $description = $_POST['description'];
+$supplier = $_POST['namasupplier'];
 
 $uploadDirImage = "assets/img/";
 $author = $_SESSION['username2'];
@@ -27,7 +28,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO barang (id_barang, jenis_barang, nama_barang, harga_beli, harga_jual, jumlah_stock, supplier) VALUES ('$idbarang', '$jenisbarang', '$namabarang','$hargabeli','$hargajual','$jumlahstock','$description')";
+$sql = "INSERT INTO barang (id_barang, jenis_barang, nama_barang, harga_beli, harga_jual, jumlah_stock, supplier, deskripsi) VALUES ('$idbarang', '$jenisbarang', '$namabarang','$hargabeli','$hargajual','$jumlahstock','$supplier','$description')";
 
 if (mysqli_query($conn, $sql)) {
     echo "<script>alert('Input data berhasil !')
