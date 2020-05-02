@@ -29,12 +29,42 @@ if (!$conn) {
 $sql = "INSERT INTO transaksi (id_barang, jenis_transaksi, jumlah_beli, total_harga, customer) VALUES ('$idbarang', '$jenistransaksi', '$jumlahbeli','$totalhargabarang', '$customer')";
 
 if (mysqli_query($conn, $sql)) {
-    echo "<script>alert('Input data berhasil !')
-location.replace('transaksi.php')</script>";
+
+    $sql2 = "SELECT * FROM barang WHERE id_barang ='$idbarang'";
+    if($result = @mysqli_query($conn,$sql2)){
+        if(mysqli_num_rows($result) > 0){ 
+            while($row = mysqli_fetch_array($result)){
+                $jumlahstock = $row['jumlah_stock'];
+                $sisabarang = $row['jumlah_stock'] - $jumlahbeli;
+                
+                $updatesql = "UPDATE barang SET jumlah_stock = '$sisabarang' WHERE id_barang = '$idbarang'";
+
+				if(mysqli_query($conn,$updatesql))
+				{
+                    echo "<script>alert('Input data sukses !')
+location.replace('transaksi.php')</script>"; 
+						
+				} else {
+                    echo "<script>alert('Terjadi kesalahan !')
+                    location.replace('transaksi.php')</script>"; 
+				}
+                break;
+            }
+
+            
+        } else {
+            echo "<script>alert('Terjadi kesalahan !')
+                    location.replace('transaksi.php')</script>"; 
+        }
+    } else {
+        echo "<script>alert('Terjadi kesalahan !')
+                    location.replace('transaksi.php')</script>"; 
+    }
+
 } else {
-    echo "<script>alert('Terjadi kesalahan!')location.replace('transaksi.php')</script>";
+    echo "<script>alert('Terjadi kesalahan !')
+                    location.replace('transaksi.php')</script>"; 
 }
 
-mysqli_close($conn);
 
 ?>

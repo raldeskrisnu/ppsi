@@ -208,120 +208,12 @@
                            if (!$conn) {
                             die("Connection failed: " . mysqli_connect_error());
                             }
-
-                           $sql = mysqli_query($conn, "SELECT COUNT(id_transaksi) as num FROM transaksi");
-                           $total_pages = mysqli_fetch_array($sql);
-                            $yourcount = $total_pages['num'];
-                           $no =1;
-                           $limit = 10;
-                           $adjacents = 50;
-                           $targetpage = "hutang.php";
-                           
-                           $page = $_GET['page'];
-                           if($page)
-                           {
-                               $start = ($page - 1) * $limit;
-                               $no = 1 + (($page - 1) * $limit);
-                               
-                               if($page == 1)
-                               {
-                                   //include_once "getData.php";
-                               }
-                           }
-                           else
-                           {
-                               $start = 0;
-                           }
-                           
-                           /* Setup page vars for display. */
-                           if ($page == 0) $page = 1;                  //if no page var is given, default to 1.
-                           $prev = $page - 1;                          //previous page is page - 1
-                           $next = $page + 1;                          //next page is page + 1
-                           $lastpage = ceil($yourcount/$limit);      //lastpage is = total pages / items per page, rounded up.
-                           $lpm1 = $lastpage - 1;
-                           
-                           $pagination = "";
-                           if($lastpage > 1)
-                           {   
-                               $pagination .= "<div class=\"pagination\">";
-                               //previous button
-                               if ($page > 1) 
-                                   $pagination.= "<a href=\"$targetpage?page=$prev\"><< Sebelumnya</a>";
-                               else
-                                   $pagination.= "<span class=\"disabled\"><< Sebelumnya</span>";  
-                               
-                               //pages 
-                               if ($lastpage < 7 + ($adjacents * 2))   //not enough pages to bother breaking it up
-                               {   
-                                   for ($counter = 1; $counter <= $lastpage; $counter++)
-                                   {
-                                       if ($counter == $page)
-                                           $pagination.= "<span class=\"current\">$counter</span>";
-                                       else
-                                           $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                   }
-                               }
-                               elseif($lastpage > 5 + ($adjacents * 2))    //enough pages to hide some
-                               {
-                                   //close to beginning; only hide later pages
-                                   if($page < 1 + ($adjacents * 2))        
-                                   {
-                                       for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
-                                       {
-                                           if ($counter == $page)
-                                               $pagination.= "<span class=\"current\">$counter</span>";
-                                           else
-                                               $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                       }
-                                       $pagination.= "...";
-                                       $pagination.= "<a href=\"$targetpage?page=$lpm1\">$lpm1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=$lastpage\">$lastpage</a>";       
-                                   }
-                                   //in middle; hide some front and some back
-                                   elseif($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2))
-                                   {
-                                       $pagination.= "<a href=\"$targetpage?page=1\">1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=2\">2</a>";
-                                       $pagination.= "...";
-                                       for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
-                                       {
-                                           if ($counter == $page)
-                                               $pagination.= "<span class=\"current\">$counter</span>";
-                                           else
-                                               $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                       }
-                                       $pagination.= "...";
-                                       $pagination.= "<a href=\"$targetpage?page=$lpm1\">$lpm1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=$lastpage\">$lastpage</a>";       
-                                   }
-                                   //close to end; only hide early pages
-                                   else
-                                   {
-                                       $pagination.= "<a href=\"$targetpage?page=1\">1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=2\">2</a>";
-                                       $pagination.= "...";
-                                       for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++)
-                                       {
-                                           if ($counter == $page)
-                                               $pagination.= "<span class=\"current\">$counter</span>";
-                                           else
-                                               $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                       }
-                                   }
-                               }
-                               
-                               //next button
-                               if ($page < $counter - 1) 
-                                   $pagination.= "<a href=\"$targetpage?page=$next\">Berikutnya >></a>";
-                               else
-                                   $pagination.= "<span class=\"disabled\">Berikutnya >></span>";
-                               $pagination.= "</div>\n";       
-                           }
-                           ?>
+            ?>
+                          
 						   
 					 <table class="table table-hover">
-						<thead>
-                           <th>No</th>
+                        <thead>
+                        <th>No</th>
                            <th>Nama barang</th>
                            <th>Harga jual</th>
                            <th>Jumlah beli</th>
@@ -334,21 +226,27 @@
                         </thead>
 						
 						<?php
-					
-						$sql = "SELECT nama_barang, id_transaksi, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang WHERE jenis_transaksi = 'Kredit'
-                        LIMIT $start, $limit";
+
+$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+$limit = 10; // Jumlah data per halamanya
+
+// Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
+$limit_start = ($page - 1) * $limit;
+$no = $limit_start + 1; // Untuk penomoran tabel
+$sql = "SELECT nama_barang, id_transaksi, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang WHERE jenis_transaksi = 'Kredit'
+                        LIMIT $limit_start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){
                                                      while($row = mysqli_fetch_array($result)){
 
-														
                            ?>
                         <tbody>
-                           <td><?php echo $no++ ?></td>
+                        <td><?php echo $no++ ?></td>
                            <td><?php echo $row['nama_barang'] ?></td>
                            <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
-						   <td><?php echo $row['jumlah_beli'] . " Barang"?></td>
+						               <td><?php echo $row['jumlah_beli'] . " Barang"?></td>
                            <td><?php echo "Rp. " . $row['total_harga'] ?></td>
                            <td><?php echo $row['customer'] ?></td>
                             <?php $id = $row['id_barang']; ?>
@@ -368,8 +266,8 @@
 								
                               </center>
                            </td> 
-							
-							 <!-- Dialog Banned -->
+						    <!-- Dialog show -->
+                           <!-- Dialog Banned -->
                            <div class="modal fade" id="false" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
                               <form action="updatetransaksi" method="post" id="clickform" class="form-horizontal">
                                  <div class="modal-dialog">
@@ -394,40 +292,6 @@
 								 </form>
                            </div>
 						   
-						    <!-- Dialog show -->
-                           <div class="modal fade" id="<?php echo $row['id_content'] ?>" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
-                              <form action="editcontent" method="post" id="clickform" class="form-horizontal">
-                                 <div class="modal-dialog">
-                                    <div class="modal-content">
-                                       <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="delmodal" aria-hidden="true">&times;</button>
-                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Comment <?php echo $row['title'] ?> </font></h4>
-                                       </div>
-                                       <div class="modal-body">
-                                          <!-- Start -->
-                                          <center>
-										  <?php
-											if($row['show_content'] == '0')
-											{
-												echo ' <h4> Are you sure show this article? </h4>';
-											}   else if($row['show_content'] == '1')
-											{
-												echo ' <h4> Are you sure unshow this article? </h4>';
-											}
-										  ?>
-                                             
-                                             <button name="editform" type="submit" class="btn btn-primary" value="<?php echo $row['id_content'] ?>">Yes</button>
-                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                          </center>
-                                       </div>
-                                       <div class="modal-footer">
-                                          <p> © Copyright 2017. Gaming Zone</p>
-                                       </div>
-                                    </div>
-                                 </div>
-								 </form>
-                           </div>
-						   
                         </tbody>
                         <?php
                            }
@@ -436,9 +300,63 @@
                            echo "ERROR: Could not able to execute $sql. ";
                            }
                            ?>
-                        <?php echo "<div align='center'>"?>
-                        <?=$pagination?>
-                        <?php echo "</div>"?>	
+                        
+                        <ul class="pagination">
+            <!-- LINK FIRST AND PREV -->
+            <?php
+            if ($page == 1) { // Jika page adalah pake ke 1, maka disable link PREV
+            ?>
+                <li class="disabled"><a href="#">First</a></li>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            <?php
+            } else { // Jika buka page ke 1
+                $link_prev = ($page > 1) ? $page - 1 : 1;
+            ?>
+                <li><a href="hutang.php?page=1">First</a></li>
+                <li><a href="hutang.php?page=<?php echo $link_prev; ?>">&laquo;</a></li>
+            <?php
+            }
+            ?>
+
+            <!-- LINK NUMBER -->
+            <?php
+            // Buat query untuk menghitung semua jumlah data
+            $sql = mysqli_query($conn, "SELECT COUNT(id_transaksi) as num FROM transaksi");
+            $total_pages = mysqli_fetch_array($sql);
+            $yourcount = $total_pages['num'];
+
+            $jumlah_page = ceil($yourcount / $limit); // Hitung jumlah halamanya
+            $jumlah_number = 3; // Tentukan jumlah link number sebelum dan sesudah page yang aktif
+            $start_number = ($page > $jumlah_number) ? $page - $jumlah_number : 1; // Untuk awal link member
+            $end_number = ($page < ($jumlah_page - $jumlah_number)) ? $page + $jumlah_number : $jumlah_page; // Untuk akhir link number
+
+            for ($i = $start_number; $i <= $end_number; $i++) {
+                $link_active = ($page == $i) ? 'class="active"' : '';
+            ?>
+                <li <?php echo $link_active; ?>><a href="hutang.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php
+            }
+            ?>
+
+            <!-- LINK NEXT AND LAST -->
+            <?php
+            // Jika page sama dengan jumlah page, maka disable link NEXT nya
+            // Artinya page tersebut adalah page terakhir
+            if ($page == $jumlah_page) { // Jika page terakhir
+            ?>
+                <li class="disabled"><a href="#">&raquo;</a></li>
+                <li class="disabled"><a href="#">Last</a></li>
+            <?php
+            } else { // Jika bukan page terakhir
+                $link_next = ($page < $jumlah_page) ? $page + 1 : $jumlah_page;
+            ?>
+                <li><a href="hutang.php?page=<?php echo $link_next; ?>">&raquo;</a></li>
+                <li><a href="hutang.php?page=<?php echo $jumlah_page; ?>">Last</a></li>
+            <?php
+            }
+            ?>
+        </ul>
+                        
 					 
 				</div>
 				
