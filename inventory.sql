@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2020 at 03:09 PM
+-- Generation Time: May 02, 2020 at 09:37 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.29
 
@@ -34,16 +34,18 @@ CREATE TABLE `barang` (
   `harga_beli` int(20) NOT NULL,
   `harga_jual` int(20) NOT NULL,
   `jumlah_stock` int(20) NOT NULL,
-  `supplier` text NOT NULL
+  `supplier` text NOT NULL,
+  `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `jenis_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah_stock`, `supplier`) VALUES
-('123R', 'alat kantor', 'kursi', 5000, 6000, 20, 'lorem ipsum'),
-('123R4', 'Alat kantor', 'Meja', 50, 2, 5, 'sdf');
+INSERT INTO `barang` (`id_barang`, `jenis_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah_stock`, `supplier`, `deskripsi`) VALUES
+('123R', 'alat kantor', 'kursi', 5000, 6000, -14, 'lorem ipsum', ''),
+('123R4', 'Alat kantor', 'Meja', 50, 2, -2298, 'sdf', ''),
+('56', 'Alat kantor', 'asd', 123, 3333, 11, 'asd', 'asd');
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,28 @@ CREATE TABLE `transaksi` (
 INSERT INTO `transaksi` (`id_transaksi`, `id_barang`, `jenis_transaksi`, `jumlah_beli`, `total_harga`, `customer`) VALUES
 (3, '123R', 'Cash', 5, 30000, 'abc'),
 (4, '123R', 'Cash', 7, 42000, 'raldes'),
-(5, '123R4', 'Kredit', 233, 466, 'raldes');
+(5, '123R4', 'Cash', 233, 466, 'raldes'),
+(6, '123R', 'Cash', 3, 18000, 'raldes'),
+(7, '123R4', 'Cash', 3, 6, 'sss'),
+(8, '123R4', 'Cash', 3, 6, 'sss'),
+(9, '123R', 'Cash', 32, 192000, 'sdd'),
+(10, '123R', 'Cash', 32, 192000, 'sdd'),
+(11, '123R', 'Cash', 32, 192000, 'sdd'),
+(12, '123R', 'Cash', 32, 192000, 'sdd'),
+(13, '123R', 'Cash', 32, 192000, 'sdd'),
+(14, '123R4', 'Cash', 2, 4, ''),
+(15, '123R4', 'Cash', 2, 4, ''),
+(16, '123R4', 'Cash', 2, 4, ''),
+(17, '123R4', 'Cash', 2, 4, ''),
+(18, '123R4', 'Cash', 2, 4, ''),
+(19, '123R4', 'Cash', 4, 8, '23'),
+(20, '123R4', 'Cash', 1, 2, 'sd'),
+(21, '123R4', 'Cash', 1, 2, 'sd'),
+(22, '123R', 'Cash', 1, 6000, 'sss'),
+(23, '123R', 'Cash', 2, 12000, 'dfff'),
+(24, '123R', 'Cash', 1, 6000, 'hhh'),
+(25, '123R4', 'Cash', 2342, 4684, 'ssg'),
+(26, '123R', 'Kredit', 12, 72000, 'asdff');
 
 -- --------------------------------------------------------
 
@@ -130,15 +153,18 @@ CREATE TABLE `user` (
   `id_user` int(5) NOT NULL,
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(60) NOT NULL
+  `password` varchar(60) NOT NULL,
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `name`, `email`, `password`) VALUES
-(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `role`) VALUES
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'owner'),
+(3, '123', 'kentufive@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'owner'),
+(6, '123', 'emscode95@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'karyawan');
 
 --
 -- Indexes for dumped tables
@@ -206,13 +232,13 @@ ALTER TABLE `jenis_transaksi`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
