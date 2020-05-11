@@ -51,7 +51,8 @@
       <span class="logo-lg"><b>Inventory Tokoku</b></span>
     </a>
 <?php 
-		  
+      
+
 			$userid = $_SESSION['username2'];	
 			
 		
@@ -87,7 +88,7 @@
                       <a href="profile" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                      <a href="signout" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="signout" class="btn btn-default btn-flat">Sign out</a>
                   </div>
               </li>
             </ul>
@@ -134,6 +135,7 @@
             </a>
 
             <ul class="treeview-menu">
+              <li><a href="stockopname"><i class="fa fa-pencil"></i> Input barang</a></li>
               <li><a href="cekbarang"><i class="fa fa-archive"></i> Check barang</a></li>
             </ul>
               
@@ -155,6 +157,24 @@
               
         </li>
 		
+		    <li class="treeview">
+          <a href="hutang">
+            <i class="fa fa-archive"></i> <span>Hutang</span>
+          </a>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder-o"></i> <span>Report</span>
+          </a>
+        </li>
+		
+        <li class="treeview">
+          <a href="user">
+            <i class="fa fa-user"></i> <span>Pengelola User</span>
+          </a>
+        </li>
+        
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -164,7 +184,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Input transaksi
+        Edit Profile
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
@@ -178,82 +198,31 @@
 		
 		<div class="row">
 
-            <form action="insertransaksi" method="post" enctype="multipart/form-data" role="form">
-            
+            <form action="updateprofile" method="post" enctype="multipart/form-data" role="form">
+
             <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4>Pilih barang</h4>
-            <select class="form-control" id="namabarang" name="namabarang" required onchange="changeValue(this.value)">
-            <option selected="true" disabled="disabled">Pilih barang</option>
-            <?php
-                $mysql_hostname = "localhost";
-                $mysql_user = "root";
-                $mysql_password = "";
-                $mysql_database = "inventory";
-
-                $conn = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password, $mysql_database);
-                if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-                }
-
-                $sql = "SELECT * FROM barang ORDER BY id_barang asc";
-                $jsArray = "var prdName = new Array();\n";
-                if($result = @mysqli_query($conn,$sql)){
-                  if(mysqli_num_rows($result) > 0){
-                      while($row = mysqli_fetch_array($result)){
-
-                        $namabarang = $row['nama_barang'];
-                        $idbarang = $row['id_barang'];
-                        $jsArray .= "prdName['" . $row['id_barang'] . "'] = {harga_barang:'" . addslashes($row['harga_jual']) . "'};\n";
-         ?>
-        
-              <option value=<?=$idbarang?>><?php echo $namabarang ?></option>
-                <?php } 
-                        } 
-                      }
-                      
-                      ?>
-
-
-              </select>
-              
+                <h4>Nama</h4>
+                <input type="text" class="form-control form-rounded" id="nama" name="nama" placeholder="Input Nama">
             </div>
 
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h4>Jenis transaksi</h4>
-                <select class="form-control" id="jenistransaksi" name="jenistransaksi">
-                  <option>Cash</option>
-                  <option>Kredit</option>
-                </select>
+                <h4>Email</h4>
+                <input type="email" class="form-control form-rounded" id="email" name="email" placeholder="Input email">
             </div>
-            
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Harga barang</h4>
-                
-                <input type="number" class="form-control form-rounded" id="harga_barang" name="harga_barang" placeholder="harga barang" readonly>
-            </div>
-           
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <h4>Jumlah beli</h4>
-                <input type="number" class="form-control form-rounded" id="jumlahbeli" name="jumlahbeli" placeholder="Input jumlah beli" onchange="calculateHarga()">
-            </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4>Total harga</h4>
-            <input type="number" class="form-control form-rounded" id="totalhargabarang" name="totalhargabarang" placeholder="Harga barang" readonly>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <h4>Password</h4>
+                <input type="password" class="form-control form-rounded" id="password" name="password" placeholder="Input Password">
+            </div>
+
         </div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4>Nama customer</h4>
-            <input type="text" class="form-control form-rounded" id="namacustomer" name="namacustomer" placeholder="Nama customer">
-        </div>
-
-    </div>
   
-    <br>
+        <br>
+           
+        <button name="iduser" id="iduser" value="<?php echo $userid; ?>" type="submit" class="btn btn-primary">Update</button>
+
+        <!-- <input type="submit" id="iduser" name="iduser" class="btn btn-primary" role="button" value="<?php $userid; ?>">abc</input> -->
     
-		<input type="submit" onclick="activation()" id="1" name="1" class="btn btn-primary" role="button" value="Submit">
 		</form>
 		
 		<br>

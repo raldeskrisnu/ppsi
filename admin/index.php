@@ -87,7 +87,12 @@
                 </p>
               </li>
               <li class="user-footer">
-                  <a href="signout" class="btn btn-default btn-flat">Sign out</a>
+                  <div class="pull-left">
+                      <a href="profile" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="signout" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
               </li>
             </ul>
           </li>

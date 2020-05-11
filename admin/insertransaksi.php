@@ -10,6 +10,9 @@ $hargabarang = $_POST['harga_barang'];
 $jumlahbeli = $_POST['jumlahbeli'];
 $totalhargabarang = $_POST['totalhargabarang'];
 $customer = $_POST['namacustomer'];
+$nikcustomer = $_POST['nikcustomer'];
+$tempatlahir = $_POST['tempatlahir'];
+$tanggallahir = $_POST['tanggallahir'];
 
 $uploadDirImage = "assets/img/";
 $author = $_SESSION['username2'];
@@ -26,7 +29,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO transaksi (id_barang, jenis_transaksi, jumlah_beli, total_harga, customer) VALUES ('$idbarang', '$jenistransaksi', '$jumlahbeli','$totalhargabarang', '$customer')";
+$sql = "INSERT INTO transaksi (id_barang, jenis_transaksi, jumlah_beli, total_harga, customer, nik_customer, tempat_lahir, tanggal_lahir) VALUES ('$idbarang', '$jenistransaksi', '$jumlahbeli','$totalhargabarang', '$customer', '$nikcustomer', '$tempatlahir', '$tanggallahir')";
 
 if (mysqli_query($conn, $sql)) {
 

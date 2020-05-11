@@ -51,7 +51,7 @@
       <span class="logo-lg"><b>Inventory Tokoku</b></span>
     </a>
 <?php 
-		  include '../assets/connect.php';
+		  
 			$userid = $_SESSION['username2'];	
 			
 		
@@ -83,14 +83,12 @@
                 </p>
               </li>
               <li class="user-footer">
-                <!--<div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>-->
-				<center>
-               
-                  <a href="signout" class="btn btn-default btn-flat">Sign out</a>
-               
-				</center>
+                  <div class="pull-left">
+                      <a href="profile" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="signout" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
               </li>
             </ul>
           </li>
@@ -271,6 +269,21 @@
             <input type="text" class="form-control form-rounded" id="namacustomer" name="namacustomer" placeholder="Nama customer">
         </div>
 
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <h4>NIK Customer</h4>
+            <input type="text" class="form-control form-rounded" id="nikcustomer" name="nikcustomer" placeholder="NIK">
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <h4>Tempat lahir</h4>
+            <input type="text" class="form-control form-rounded" id="tempatlahir" name="tempatlahir" placeholder="Tempat Lahir">
+        </div>
+        
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <h4>Tanggal lahir</h4>
+            <input type="date" class="form-control form-rounded" id="tanggallahir" name="tanggallahir">
+        </div>
+        
     </div>
   
     <br>
