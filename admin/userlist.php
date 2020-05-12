@@ -8,7 +8,6 @@
    		
    		error_reporting(0);
    		ini_set('display_errors', 0);
-   		
        ?>
 	   
 <!DOCTYPE html>
@@ -39,36 +38,24 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>P</span>
+      <span class="logo-mini"><b>I</b>T</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Control Panel</b></span>
+      <span class="logo-lg"><b>Inventory Tokoku</b></span>
     </a>
+        <?php 
 
+			$userid = $_SESSION['username2'];	
+			
+		
+		  ?>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-	  
-	   <?php 
-		  
-			$userid = $_SESSION['username2'];	
-			$sql = "select * from special_access where username = '$userid'";
-			
-			if($result = @mysql_query($sql)){
-				 if(mysql_num_rows($result) > 0){
-					 while($row = mysql_fetch_array($result)){
-						$username = $row['username'];
-						
-					}
-				 }
-			}
-		
-		  ?>
-		  
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -78,16 +65,13 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="img/user.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo ucfirst ($username); ?></span>
+              <span class="hidden-xs"><?php echo ucfirst ($userid); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="img/user.png" class="img-circle" alt="User Image">
-
-                <p>
-                 <?php echo ucfirst ($username); ?>
-                </p>
+                    <p><?php echo ucfirst ($userid); ?></p>
               </li>
               <li class="user-footer">
                   <div class="pull-left">
@@ -115,7 +99,7 @@
           <img src="img/user.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo ucfirst ($username); ?></p>
+            <p><?php echo ucfirst ($userid); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -131,34 +115,64 @@
         </li>
 
         <li class="treeview">
-         <a href="allcontent">
-            <i class="fa fa-laptop"></i>
-            <span>Contents</span>	
-			<span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-         <ul class="treeview-menu">
-		 <li><a href="allcontent"><i class="fa fa-circle-o"></i> All Content</a></li>
-             <li><a href="news"><i class="fa fa-circle-o"></i> News</a></li>
-            <li><a href="kth"><i class="fa fa-circle-o"></i> Kth</a></li>
-            <li><a href="event"><i class="fa fa-circle-o"></i> Event</a></li>
-          </ul>
-         
-        </li>
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Barang</span>	
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li><a href="stockopname"><i class="fa fa-pencil"></i> Input barang</a></li>
+              <li><a href="cekbarang"><i class="fa fa-archive"></i> Check barang</a></li>
+            </ul>
+              
+        </li>  
 		
         <li class="treeview">
-          <a href="viewcomment">
-            <i class="fa fa-comments"></i> <span>View Comments</span>
-          </a>
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Transaksi</span>	
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li><a href="transaksi"><i class="fa fa-pencil"></i> Input transaksi</a></li>
+              <li><a href="cektransaksi"><i class="fa fa-archive"></i> Lihat transaksi</a></li>
+            </ul>
+              
         </li>
 		
-		<li class="active treeview">
-          <a href="userlist">
-            <i class="fa fa-user"></i> <span>User List</span>
+		    <li class="treeview">
+          <a href="hutang">
+            <i class="fa fa-archive"></i> <span>Hutang</span>
           </a>
         </li>
-		
+
+        <li class="treeview">
+          <a href="report">
+            <i class="fa fa-folder-o"></i> <span>Report</span>
+          </a>
+        </li>
+
+        <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Pengelola user</span>	
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li><a href="user"><i class="fa fa-user"></i> Daftar user</a></li>
+              <li><a href="userlist"><i class="fa fa-archive"></i> List user</a></li>
+            </ul>
+              
+        </li>
         
     </section>
     <!-- /.sidebar -->
@@ -169,12 +183,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        User List
+        List user
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">User list</li>
+        <li class="active">List user</li>
       </ol>
     </section>
 
@@ -190,171 +204,102 @@
 				<div class="box">
                       <div class="box-body table-responsive no-padding">
 					  
-					  <?php
-                           include_once "../assets/connect.php";
-                           
-                           $sql = mysql_query("SELECT COUNT(id_user) as num FROM user") or die (mysql_error());
-                           $total_pages = mysql_fetch_array($sql);
-                            $yourcount = $total_pages['num'];
-                           $no =1;
-                           $limit = 10;
-                           $adjacents = 50;
-                           $targetpage = "topik.php";
-                           
-                           $page = $_GET['page'];
-                           if($page)
-                           {
-                               $start = ($page - 1) * $limit;
-                               $no = 1 + (($page - 1) * $limit);
-                               
-                               if($page == 1)
-                               {
-                                   //include_once "getData.php";
-                               }
-                           }
-                           else
-                           {
-                               $start = 0;
-                           }
-                           
-                           /* Setup page vars for display. */
-                           if ($page == 0) $page = 1;                  //if no page var is given, default to 1.
-                           $prev = $page - 1;                          //previous page is page - 1
-                           $next = $page + 1;                          //next page is page + 1
-                           $lastpage = ceil($yourcount/$limit);      //lastpage is = total pages / items per page, rounded up.
-                           $lpm1 = $lastpage - 1;
-                           
-                           $pagination = "";
-                           if($lastpage > 1)
-                           {   
-                               $pagination .= "<div class=\"pagination\">";
-                               //previous button
-                               if ($page > 1) 
-                                   $pagination.= "<a href=\"$targetpage?page=$prev\"><< Sebelumnya</a>";
-                               else
-                                   $pagination.= "<span class=\"disabled\"><< Sebelumnya</span>";  
-                               
-                               //pages 
-                               if ($lastpage < 7 + ($adjacents * 2))   //not enough pages to bother breaking it up
-                               {   
-                                   for ($counter = 1; $counter <= $lastpage; $counter++)
-                                   {
-                                       if ($counter == $page)
-                                           $pagination.= "<span class=\"current\">$counter</span>";
-                                       else
-                                           $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                   }
-                               }
-                               elseif($lastpage > 5 + ($adjacents * 2))    //enough pages to hide some
-                               {
-                                   //close to beginning; only hide later pages
-                                   if($page < 1 + ($adjacents * 2))        
-                                   {
-                                       for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
-                                       {
-                                           if ($counter == $page)
-                                               $pagination.= "<span class=\"current\">$counter</span>";
-                                           else
-                                               $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                       }
-                                       $pagination.= "...";
-                                       $pagination.= "<a href=\"$targetpage?page=$lpm1\">$lpm1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=$lastpage\">$lastpage</a>";       
-                                   }
-                                   //in middle; hide some front and some back
-                                   elseif($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2))
-                                   {
-                                       $pagination.= "<a href=\"$targetpage?page=1\">1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=2\">2</a>";
-                                       $pagination.= "...";
-                                       for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
-                                       {
-                                           if ($counter == $page)
-                                               $pagination.= "<span class=\"current\">$counter</span>";
-                                           else
-                                               $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                       }
-                                       $pagination.= "...";
-                                       $pagination.= "<a href=\"$targetpage?page=$lpm1\">$lpm1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=$lastpage\">$lastpage</a>";       
-                                   }
-                                   //close to end; only hide early pages
-                                   else
-                                   {
-                                       $pagination.= "<a href=\"$targetpage?page=1\">1</a>";
-                                       $pagination.= "<a href=\"$targetpage?page=2\">2</a>";
-                                       $pagination.= "...";
-                                       for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++)
-                                       {
-                                           if ($counter == $page)
-                                               $pagination.= "<span class=\"current\">$counter</span>";
-                                           else
-                                               $pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";                 
-                                       }
-                                   }
-                               }
-                               
-                               //next button
-                               if ($page < $counter - 1) 
-                                   $pagination.= "<a href=\"$targetpage?page=$next\">Berikutnya >></a>";
-                               else
-                                   $pagination.= "<span class=\"disabled\">Berikutnya >></span>";
-                               $pagination.= "</div>\n";       
-                           }
-                           ?>
+					  <!-- /.box-header -->
+                     <div class="box-body table-responsive no-padding">
+                        <?php
+                           $mysql_hostname = "localhost";
+                           $mysql_user = "root";
+                           $mysql_password = "";
+                           $mysql_database = "inventory";
+
+                           $conn = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password, $mysql_database);
+                           if (!$conn) {
+                            die("Connection failed: " . mysqli_connect_error());
+                            }
+            ?>
+                          
 						   
 					 <table class="table table-hover">
-						<thead>
-                           <th>No</th>
-                           <th>Username</th>
+                        <thead>
+                        <th>No</th>
+                           <th>Nama</th>
                            <th>Email</th>
-                           <th>Join Date</th>
+                           <th>Role</th>
                            <th>
                               <center>Action</center>
                            </th>
                         </thead>
 						
 						<?php
-					
-						$sql = "Select * from user order by id_user DESC LIMIT $start, $limit";
+
+$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+$limit = 10; // Jumlah data per halamanya
+
+// Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
+$limit_start = ($page - 1) * $limit;
+$no = $limit_start + 1; // Untuk penomoran tabel
+$sql = "SELECT * FROM user LIMIT $limit_start, $limit";
                                              
-                                             if($result = @mysql_query($sql)){
-                                                 if(mysql_num_rows($result) > 0){
-                                                     while($row = mysql_fetch_array($result)){
-														// $TopicCategori = $row['nama_kategori'];
-														// $grups = $row['nama_grup'];
-														
+                                             if($result = @mysqli_query($conn,$sql)){
+                                                 if(mysqli_num_rows($result) > 0){
+                                                     while($row = mysqli_fetch_array($result)){
+
                            ?>
                         <tbody>
-                           <td><?php echo $no++ ?></td>
+                        <td><?php echo $no++ ?></td>
                            <td><?php echo $row['name'] ?></td>
                            <td><?php echo $row['email'] ?></td>
-                           <td><?php echo $row['date_join'] ?></td>
-                           <td width="140x">
-                              <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_comment'] ?>">Ubah</button> -->
-                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Banned</button>
+                            <td><?php echo $row['role']?></td>
+                           <td width="200px">
+                              <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
+                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Edit</button>
+								<?php
+									if($row['show_content'] == '0')
+									{
+										echo ' <button class="btn btn-primary" data-toggle="modal" data-target="#'. $row["id_barang"] .'">show</button>';
+									} else if($row['show_content'] == '1')
+									{
+										echo ' <button class="btn btn-primary" data-toggle="modal" data-target="#'. $row["id_barang"] .'">unshow</button>';
+									}
+								 ?>
+								
                               </center>
                            </td> 
-							
-							 <!-- Dialog Banned -->
+						    <!-- Dialog show -->
+                           <!-- Dialog Banned -->
                            <div class="modal fade" id="false" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
-                              <form action="deletecomment" method="post" id="clickform" class="form-horizontal">
+                              <form action="updaprofilewithrole" method="post" id="clickform" class="form-horizontal">
                                  <div class="modal-dialog">
                                     <div class="modal-content">
                                        <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="delmodal" aria-hidden="true">&times;</button>
-                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Comment <?php echo $row['name'] ?> </font></h4>
+                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Nama User : <?php echo $row['name'] ?> </font></h4>
                                        </div>
                                        <div class="modal-body">
                                           <!-- Start -->
-                                          <center>
-                                             <h4> Are you sure banned this user? </h4>
-                                             <button name="idform" type="submit" class="btn btn-primary" value="<?php echo $row['id_comment'] ?>">Ban</button>
-                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                          </center>
+
+                                          
+                                            <h4>Nama</h4>
+                                            <input type="text" class="form-control form-rounded" id="nama" name="nama" placeholder="Nama">
+ 
+                                            <h4>Email</h4>
+                                            <input type="text" class="form-control form-rounded" id="email" name="email" placeholder="Nama">
+
+                                            <h4>Password</h4>
+                                            <input type="password" class="form-control form-rounded" id="password" name="password" placeholder="Password">
+
+                                            <h4>Role user</h4>
+                                                <select class="form-control" id="roleuser" name="roleuser">
+                                                <option>Owner</option>
+                                                <option>Karyawan</option>
+                                            </select>
+                                <br>
+                                            <button name="iduser" type="submit" class="btn btn-primary" value="<?php echo $row['email']; ?>">Update</button>
                                        </div>
+                                    
                                        <div class="modal-footer">
-                                          <p> © Copyright 2017. Gaming Zone</p>
+                                          <p> © Copyright 2017. Inventory Tokoku</p>
                                        </div>
                                     </div>
                                  </div>
@@ -369,10 +314,63 @@
                            echo "ERROR: Could not able to execute $sql. ";
                            }
                            ?>
-                        <?php echo "<div align='center'>"?>
-                        <?=$pagination?>
-                        <?php echo "</div>"?>	
-				 </div>
+                        
+                        <ul class="pagination">
+            <!-- LINK FIRST AND PREV -->
+            <?php
+            if ($page == 1) { // Jika page adalah pake ke 1, maka disable link PREV
+            ?>
+                <li class="disabled"><a href="#">First</a></li>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            <?php
+            } else { // Jika buka page ke 1
+                $link_prev = ($page > 1) ? $page - 1 : 1;
+            ?>
+                <li><a href="userlist.php?page=1">First</a></li>
+                <li><a href="userlist.php?page=<?php echo $link_prev; ?>">&laquo;</a></li>
+            <?php
+            }
+            ?>
+
+            <!-- LINK NUMBER -->
+            <?php
+            // Buat query untuk menghitung semua jumlah data
+            $sql = mysqli_query($conn, "SELECT COUNT(id_transaksi) as num FROM transaksi");
+            $total_pages = mysqli_fetch_array($sql);
+            $yourcount = $total_pages['num'];
+
+            $jumlah_page = ceil($yourcount / $limit); // Hitung jumlah halamanya
+            $jumlah_number = 3; // Tentukan jumlah link number sebelum dan sesudah page yang aktif
+            $start_number = ($page > $jumlah_number) ? $page - $jumlah_number : 1; // Untuk awal link member
+            $end_number = ($page < ($jumlah_page - $jumlah_number)) ? $page + $jumlah_number : $jumlah_page; // Untuk akhir link number
+
+            for ($i = $start_number; $i <= $end_number; $i++) {
+                $link_active = ($page == $i) ? 'class="active"' : '';
+            ?>
+                <li <?php echo $link_active; ?>><a href="userlist.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php
+            }
+            ?>
+
+            <!-- LINK NEXT AND LAST -->
+            <?php
+            // Jika page sama dengan jumlah page, maka disable link NEXT nya
+            // Artinya page tersebut adalah page terakhir
+            if ($page == $jumlah_page) { // Jika page terakhir
+            ?>
+                <li class="disabled"><a href="#">&raquo;</a></li>
+                <li class="disabled"><a href="#">Last</a></li>
+            <?php
+            } else { // Jika bukan page terakhir
+                $link_next = ($page < $jumlah_page) ? $page + 1 : $jumlah_page;
+            ?>
+                <li><a href="userlist.php?page=<?php echo $link_next; ?>">&raquo;</a></li>
+                <li><a href="userlist.php?page=<?php echo $jumlah_page; ?>">Last</a></li>
+            <?php
+            }
+            ?>
+        </ul>
+                        
 					 
 				</div>
 				
@@ -380,7 +378,7 @@
 			  </div>
 			   
 		</div>
-		
+
     </section>
     <!-- /.content -->
   </div>

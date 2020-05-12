@@ -169,9 +169,19 @@
         </li>
 		
         <li class="treeview">
-          <a href="user">
-            <i class="fa fa-user"></i> <span>Pengelola User</span>
-          </a>
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Pengelola user</span>	
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li><a href="user"><i class="fa fa-user"></i> Daftar user</a></li>
+              <li><a href="userlist"><i class="fa fa-archive"></i> List user</a></li>
+            </ul>
+              
         </li>
         
     </section>
