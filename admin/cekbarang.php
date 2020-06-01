@@ -242,7 +242,7 @@ $limit = 10; // Jumlah data per halamanya
 // Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
 $limit_start = ($page - 1) * $limit;
 $no = $limit_start + 1; // Untuk penomoran tabel
-						$sql = "SELECT * FROM barang order by id_barang DESC LIMIT $limit_start, $limit";
+						$sql = "SELECT * FROM barang order by created_at desc LIMIT $limit_start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){

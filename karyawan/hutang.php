@@ -328,8 +328,8 @@
 						
 						<?php
 					
-						$sql = "SELECT nama_barang, id_transaksi, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang WHERE jenis_transaksi = 'Kredit'
-                        LIMIT $start, $limit";
+          $sql = "SELECT nama_barang, id_transaksi, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer, tanggal_transaksi, nomor_hp, alamat FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang WHERE jenis_transaksi = 'Kredit'
+          ORDER BY t2.created_at LIMIT $limit_start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){
@@ -344,6 +344,9 @@
 						   <td><?php echo $row['jumlah_beli'] . " Barang"?></td>
                            <td><?php echo "Rp. " . $row['total_harga'] ?></td>
                            <td><?php echo $row['customer'] ?></td>
+                           <td><?php echo $row['tanggal_transaksi'] ?></td>
+                           <td><?php echo $row['nomor_hp'] ?></td>
+                           <td><?php echo $row['alamat'] ?></td>
                             <?php $id = $row['id_barang']; ?>
                            <td><?php echo $row['jenis_transaksi'] ?></td>
                            <td width="200px">

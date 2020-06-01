@@ -13,6 +13,8 @@ $customer = $_POST['namacustomer'];
 $nikcustomer = $_POST['nikcustomer'];
 $tempatlahir = $_POST['tempatlahir'];
 $tanggallahir = $_POST['tanggallahir'];
+$nomorhp = $_POST['nomorhp'];
+$alamat = $_POST['alamat'];
 
 $uploadDirImage = "assets/img/";
 $author = $_SESSION['username2'];
@@ -24,12 +26,15 @@ $mysql_password = "";
 $mysql_database = "inventory";
 
 $conn = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password, $mysql_database);
+$todaydate = date('Y-m-d');
+
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO transaksi (id_barang, jenis_transaksi, jumlah_beli, total_harga, customer, nik_customer, tempat_lahir, tanggal_lahir) VALUES ('$idbarang', '$jenistransaksi', '$jumlahbeli','$totalhargabarang', '$customer', '$nikcustomer', '$tempatlahir', '$tanggallahir')";
+$sql = "INSERT INTO transaksi (id_barang, jenis_transaksi, jumlah_beli, total_harga, customer, nik_customer, tempat_lahir, tanggal_lahir, tanggal_transaksi, nomor_hp, alamat) 
+VALUES ('$idbarang', '$jenistransaksi', '$jumlahbeli','$totalhargabarang', '$customer', '$nikcustomer', '$tempatlahir', '$tanggallahir', '$todaydate', '$nomorhp', '$alamat')";
 
 if (mysqli_query($conn, $sql)) {
 

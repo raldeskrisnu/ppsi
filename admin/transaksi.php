@@ -293,6 +293,16 @@
             <h4>Tanggal lahir</h4>
             <input type="date" class="form-control form-rounded" id="tanggallahir" name="tanggallahir">
         </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <h4>Nomor Handphone</h4>
+            <input type="number" class="form-control form-rounded" id="nomorhp" name="nomorhp">
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <h4>Alamat</h4>
+            <input type="text" class="form-control form-rounded" id="alamat" name="alamat">
+        </div>
         
     </div>
   

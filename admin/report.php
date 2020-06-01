@@ -140,7 +140,7 @@
               
         </li>   
 		
-        <li class="active treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Transaksi</span>	
@@ -149,7 +149,7 @@
               </span>
             </a>
 
-            <ul class="treeview-menu">
+            <ul class="treeview-menu">\
               <li><a href="transaksi"><i class="fa fa-pencil"></i> Input transaksi</a></li>
               <li><a href="cektransaksi"><i class="fa fa-archive"></i> Lihat transaksi</a></li>
             </ul>
@@ -162,7 +162,7 @@
           </a>
         </li>
 
-        <li class="treeview">
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
@@ -216,6 +216,7 @@
                     <option value="Data Barang">Data Barang</option>
                     <option value="Data Transaksi">Data Transaksi</option>
                     <option value="Data Hutang">Data Hutang</option>
+                    <option value="Data User">Data User</option>
                 </select>
                 
                 </div>            

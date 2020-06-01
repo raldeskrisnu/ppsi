@@ -8,6 +8,8 @@
         header("Location: downloaddatabarang.php");
     } else if($databarang == "Data Hutang") {
         header("Location: downloaddatahutang.php");
+    } else if($databarang == "Data User") {
+        header("Location: downloaddatauser.php");
     }
     
 

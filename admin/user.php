@@ -163,7 +163,7 @@
         </li>
 
         <li class="treeview">
-          <a href="#">
+          <a href="report">
             <i class="fa fa-folder-o"></i> <span>Report</span>
           </a>
         </li>

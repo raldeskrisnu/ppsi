@@ -226,7 +226,10 @@
                            <th>Email</th>
                            <th>Role</th>
                            <th>
-                              <center>Action</center>
+                              <center>Edit</center>
+                           </th>
+                           <th>
+                              <center>Delete</center>
                            </th>
                         </thead>
 						
@@ -239,7 +242,7 @@ $limit = 10; // Jumlah data per halamanya
 // Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
 $limit_start = ($page - 1) * $limit;
 $no = $limit_start + 1; // Untuk penomoran tabel
-$sql = "SELECT * FROM user LIMIT $limit_start, $limit";
+$sql = "SELECT * FROM user ORDER BY created_at desc LIMIT $limit_start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){
@@ -253,22 +256,17 @@ $sql = "SELECT * FROM user LIMIT $limit_start, $limit";
                             <td><?php echo $row['role']?></td>
                            <td width="200px">
                               <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
-                                 <button class="btn btn-primary" data-toggle="modal" data-target="#false">Edit</button>
-								<?php
-									if($row['show_content'] == '0')
-									{
-										echo ' <button class="btn btn-primary" data-toggle="modal" data-target="#'. $row["id_barang"] .'">show</button>';
-									} else if($row['show_content'] == '1')
-									{
-										echo ' <button class="btn btn-primary" data-toggle="modal" data-target="#'. $row["id_barang"] .'">unshow</button>';
-									}
-								 ?>
-								
+                                 <button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_user'] ?>">Edit</button>
+                              </center>
+                           </td> 
+                           <td width="200px">
+                              <center><!--<button class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row['id_barang'] ?>">Ubah</button> -->
+                                 <button class="btn btn-primary" data-toggle="modal" data-target="#2<?php echo $row['id_user'] ?>">Delete</button>
                               </center>
                            </td> 
 						    <!-- Dialog show -->
                            <!-- Dialog Banned -->
-                           <div class="modal fade" id="false" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
+                           <div class="modal fade" id="<?php echo $row['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
                               <form action="updaprofilewithrole" method="post" id="clickform" class="form-horizontal">
                                  <div class="modal-dialog">
                                     <div class="modal-content">
@@ -300,6 +298,28 @@ $sql = "SELECT * FROM user LIMIT $limit_start, $limit";
                                     
                                        <div class="modal-footer">
                                           <p> © Copyright 2017. Inventory Tokoku</p>
+                                       </div>
+                                    </div>
+                                 </div>
+								 </form>
+                           </div>
+
+                           <div class="modal fade" id="2<?php echo $row['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="yourmodallabel" aria-hidden="true">
+                              <form action="deleteprofilewithrole" method="post" id="clickform" class="form-horizontal">
+                                 <div class="modal-dialog">
+                                    <div class="modal-content">
+                                       <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="delmodal" aria-hidden="true">&times;</button>
+                                          <h4 class="modal-title" id="yourmodallabel"><font face="Comic Sans MS" align="center">Hapus User : <?php echo $row['name'] ?> </font></h4>
+                                       </div>
+                                       <div class="modal-body">
+                                          <!-- Start -->
+
+                                            <h4>Apakah anda yakin ingin hapus user <?php echo $row['name'] ?> ?</h4>
+                                    
+                                       <div class="modal-footer">
+                                       <button name="iduser" type="submit" class="btn btn-primary" value="<?php echo $row['email']; ?>">Hapus</button>
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                        </div>
                                     </div>
                                  </div>

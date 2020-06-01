@@ -199,6 +199,7 @@
                            <th>Harga jual</th>
                            <th>Customer</th>
                            <th>Jenis transaksi</th>
+                           <th>Tanggal transaksi</th>
                         </thead>
 						
 						<?php
@@ -210,7 +211,8 @@ $limit = 10; // Jumlah data per halamanya
 // Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
 $limit_start = ($page - 1) * $limit;
 $no = $limit_start + 1; // Untuk penomoran tabel
-$sql = "SELECT nama_barang, id_transaksi, harga_beli, harga_jual, total_harga, jumlah_beli, jenis_transaksi, customer FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang LIMIT $limit_start, $limit";
+$sql = "SELECT nama_barang, id_transaksi, harga_beli, harga_jual, total_harga, jumlah_beli, jenis_transaksi, tanggal_transaksi, customer 
+FROM barang t1 INNER JOIN transaksi t2 ON t2.id_barang = t1.id_barang ORDER BY t2.created_at LIMIT $limit_start, $limit";
                                              
                                              if($result = @mysqli_query($conn,$sql)){
                                                  if(mysqli_num_rows($result) > 0){
@@ -224,6 +226,7 @@ $sql = "SELECT nama_barang, id_transaksi, harga_beli, harga_jual, total_harga, j
 						   <td><?php echo "Rp. " . $row['harga_jual'] ?></td>
                            <td><?php echo $row['customer'] ?></td>
                            <td><?php echo $row['jenis_transaksi'] ?></td>
+                           <td><?php echo $row['tanggal_transaksi'] ?></td>
 							<?php $id = $row['id_barang']; ?>
 	
 						    <!-- Dialog show -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 11, 2020 at 05:11 PM
+-- Generation Time: Jun 01, 2020 at 08:16 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.29
 
@@ -35,17 +35,18 @@ CREATE TABLE `barang` (
   `harga_jual` int(20) NOT NULL,
   `jumlah_stock` int(20) NOT NULL,
   `supplier` text NOT NULL,
-  `deskripsi` text NOT NULL
+  `deskripsi` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `jenis_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah_stock`, `supplier`, `deskripsi`) VALUES
-('123R', 'alat kantor', 'kursi', 5000, 6000, -15, 'lorem ipsum', ''),
-('123R4', 'Alat kantor', 'Meja', 50, 2, -2298, 'sdf', ''),
-('56', 'Alat kantor', 'asd', 123, 3333, 11, 'asd', 'asd');
+INSERT INTO `barang` (`id_barang`, `jenis_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah_stock`, `supplier`, `deskripsi`, `created_at`) VALUES
+('123R', 'alat kantor', 'kursi', 5000, 6000, 10000, 'lorem ipsum', '', '2020-05-31 17:26:18'),
+('123R4', 'Alat kantor', 'Meja', 50, 2, 10000, 'sdf', '', '2020-06-01 17:26:18'),
+('56', 'Alat kantor', 'asd', 123, 3333, 100000, 'asd', 'asd', '2020-05-01 17:26:18');
 
 -- --------------------------------------------------------
 
@@ -57,7 +58,8 @@ CREATE TABLE `hutang` (
   `id_hutang` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `total_harga` int(11) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -113,39 +115,12 @@ CREATE TABLE `transaksi` (
   `customer` text NOT NULL,
   `nik_customer` text NOT NULL,
   `tempat_lahir` text NOT NULL,
-  `tanggal_lahir` varchar(30) NOT NULL
+  `tanggal_lahir` varchar(30) NOT NULL,
+  `tanggal_transaksi` date NOT NULL,
+  `nomor_hp` bigint(14) NOT NULL,
+  `alamat` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id_transaksi`, `id_barang`, `jenis_transaksi`, `jumlah_beli`, `total_harga`, `customer`, `nik_customer`, `tempat_lahir`, `tanggal_lahir`) VALUES
-(3, '123R', 'Cash', 5, 30000, 'abc', '', '', ''),
-(4, '123R', 'Cash', 7, 42000, 'raldes', '', '', ''),
-(5, '123R4', 'Cash', 233, 466, 'raldes', '', '', ''),
-(6, '123R', 'Cash', 3, 18000, 'raldes', '', '', ''),
-(7, '123R4', 'Cash', 3, 6, 'sss', '', '', ''),
-(8, '123R4', 'Cash', 3, 6, 'sss', '', '', ''),
-(9, '123R', 'Cash', 32, 192000, 'sdd', '', '', ''),
-(10, '123R', 'Cash', 32, 192000, 'sdd', '', '', ''),
-(11, '123R', 'Cash', 32, 192000, 'sdd', '', '', ''),
-(12, '123R', 'Cash', 32, 192000, 'sdd', '', '', ''),
-(13, '123R', 'Cash', 32, 192000, 'sdd', '', '', ''),
-(14, '123R4', 'Cash', 2, 4, '', '', '', ''),
-(15, '123R4', 'Cash', 2, 4, '', '', '', ''),
-(16, '123R4', 'Cash', 2, 4, '', '', '', ''),
-(17, '123R4', 'Cash', 2, 4, '', '', '', ''),
-(18, '123R4', 'Cash', 2, 4, '', '', '', ''),
-(19, '123R4', 'Cash', 4, 8, '23', '', '', ''),
-(20, '123R4', 'Cash', 1, 2, 'sd', '', '', ''),
-(21, '123R4', 'Cash', 1, 2, 'sd', '', '', ''),
-(22, '123R', 'Cash', 1, 6000, 'sss', '', '', ''),
-(23, '123R', 'Cash', 2, 12000, 'dfff', '', '', ''),
-(24, '123R', 'Cash', 1, 6000, 'hhh', '', '', ''),
-(25, '123R4', 'Cash', 2342, 4684, 'ssg', '', '', ''),
-(26, '123R', 'Kredit', 12, 72000, 'asdff', '', '', ''),
-(27, '123R', 'Kredit', 1, 6000, 'raldes', '123asd123123', 'asdaa', '2000-02-01');
 
 -- --------------------------------------------------------
 
@@ -158,17 +133,17 @@ CREATE TABLE `user` (
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL,
-  `role` varchar(50) NOT NULL
+  `role` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `role`) VALUES
-(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'owner'),
-(3, 'gggg', 'kraldes@yahoo.com', '0bdba65117548964bad7181a1a9f99e4', 'owner'),
-(6, '123', 'hahahihi@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'karyawan');
+INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `role`, `created_at`) VALUES
+(3, 'gggg', 'kraldes@yahoo.com', '21232f297a57a5a743894a0e4a801fc3', 'owner', '2020-06-01 17:37:47'),
+(6, '123', 'hahahihi@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'karyawan', '2020-06-01 17:37:47');
 
 --
 -- Indexes for dumped tables
@@ -236,7 +211,7 @@ ALTER TABLE `jenis_transaksi`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `user`
