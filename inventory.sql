@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 01, 2020 at 08:16 PM
+-- Generation Time: Jun 11, 2020 at 06:43 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.29
 
@@ -44,8 +44,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `jenis_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah_stock`, `supplier`, `deskripsi`, `created_at`) VALUES
-('123R', 'alat kantor', 'kursi', 5000, 6000, 10000, 'lorem ipsum', '', '2020-05-31 17:26:18'),
-('123R4', 'Alat kantor', 'Meja', 50, 2, 10000, 'sdf', '', '2020-06-01 17:26:18'),
+('123R', 'alat kantor', 'kursi', 5000, 6000, 9992, 'lorem ipsum', '', '2020-06-11 15:37:56'),
+('123R4', 'Alat kantor', 'Meja', 50, 2, 9944, 'sdf', '', '2020-06-11 15:41:13'),
 ('56', 'Alat kantor', 'asd', 123, 3333, 100000, 'asd', 'asd', '2020-05-01 17:26:18');
 
 -- --------------------------------------------------------
@@ -115,12 +115,21 @@ CREATE TABLE `transaksi` (
   `customer` text NOT NULL,
   `nik_customer` text NOT NULL,
   `tempat_lahir` text NOT NULL,
-  `tanggal_lahir` varchar(30) NOT NULL,
   `tanggal_transaksi` date NOT NULL,
   `nomor_hp` bigint(14) NOT NULL,
   `alamat` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `id_barang`, `jenis_transaksi`, `jumlah_beli`, `total_harga`, `customer`, `nik_customer`, `tempat_lahir`, `tanggal_transaksi`, `nomor_hp`, `alamat`, `created_at`) VALUES
+(128, '123R', 'Cash', 1, 6000, 'sss', '123asd12312322', 'asdaa', '2020-06-11', 85774854548, 'asdafgg', '2020-06-11 15:04:37'),
+(129, '123R', 'Cash', 5, 30000, 'asdgg', '123asd123123', 'asdaa', '2020-06-11', 8578412484, 'asda', '2020-06-11 15:05:06'),
+(130, '123R', 'Cash', 2, 12000, 'adsf', '123asd12312322', 'asdaa', '2020-06-10', 8578544886585, 'asdfff', '2020-06-11 15:37:56'),
+(131, '123R4', 'Kredit', 56, 112, 'asdff', '123asd12312322', 'asdaa', '2020-06-08', 1234123, 'asdasda', '2020-06-11 15:41:13');
 
 -- --------------------------------------------------------
 
@@ -211,7 +220,7 @@ ALTER TABLE `jenis_transaksi`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `user`
