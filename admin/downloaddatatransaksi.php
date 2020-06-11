@@ -32,7 +32,7 @@
 	?>
  
  <center>
-		<h1>Data Hutang<br/></h1>
+		<h1>Data Transaksi<br/></h1>
 	</center>
  
 	<table border="1">

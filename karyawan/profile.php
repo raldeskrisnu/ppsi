@@ -135,13 +135,12 @@
             </a>
 
             <ul class="treeview-menu">
-              <li><a href="stockopname"><i class="fa fa-pencil"></i> Input barang</a></li>
               <li><a href="cekbarang"><i class="fa fa-archive"></i> Check barang</a></li>
             </ul>
               
         </li>   
 		
-        <li class="active treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
               <span>Transaksi</span>	
@@ -155,24 +154,6 @@
               <li><a href="cektransaksi"><i class="fa fa-archive"></i> Lihat transaksi</a></li>
             </ul>
               
-        </li>
-		
-		    <li class="treeview">
-          <a href="hutang">
-            <i class="fa fa-archive"></i> <span>Hutang</span>
-          </a>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder-o"></i> <span>Report</span>
-          </a>
-        </li>
-		
-        <li class="treeview">
-          <a href="user">
-            <i class="fa fa-user"></i> <span>Pengelola User</span>
-          </a>
         </li>
         
     </section>

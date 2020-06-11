@@ -124,7 +124,6 @@
             </a>
 
             <ul class="treeview-menu">
-              <li><a href="stockopname"><i class="fa fa-pencil"></i> Input barang</a></li>
               <li><a href="cekbarang"><i class="fa fa-archive"></i> Check barang</a></li>
             </ul>
               

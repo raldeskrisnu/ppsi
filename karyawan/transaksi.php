@@ -260,7 +260,7 @@
         </div>
         
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4>Tanggal lahir</h4>
+            <h4>Tanggal transaksi</h4>
             <input type="date" class="form-control form-rounded" id="tanggallahir" name="tanggallahir">
         </div>
 
